@@ -25,6 +25,37 @@ public:
 	{
 		isOpen = is_open;
 	}
+	// IsOpen Accessor
+	bool IsOpen() const;
+
+	bool SetWorkTicket(int ticket_number, string client_id, int day, int month, int year, string description, bool is_open);
+
+	
+
+
+private:
+	bool isOpen;
+
+};
+
+inline bool ExtendedWorkTicket::IsOpen() const
+{
+	return isOpen;
+}
+
+inline bool ExtendedWorkTicket::SetWorkTicket(int ticket_number, string client_id, int day, int month, int year,
+	string description, bool is_open)
+{
+	if (WorkTicket::SetWorkTicket(ticket_number, client_id, day, month, year, description))
+	{
+		isOpen = is_open;
+		return true; // returns true since all the parameters are valid
+	}
+	else
+	{
+		return false; // does not set parameters and returns false
+	}
+}
 
 
 
