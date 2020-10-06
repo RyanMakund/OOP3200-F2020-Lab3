@@ -27,12 +27,14 @@ public:
 	}
 	// IsOpen Accessor
 	bool IsOpen() const;
-
+	
 	bool SetWorkTicket(int ticket_number, string client_id, int day, int month, int year, string description, bool is_open);
 
 	void ShowWorkTicket() const override;
 
 	void CloseTicket();
+
+	friend ostream& operator<<(ostream& out, const ExtendedWorkTicket& ticket); // Output 
  
 
 private:
@@ -74,9 +76,23 @@ inline void ExtendedWorkTicket::ShowWorkTicket() const
 
 inline void ExtendedWorkTicket::CloseTicket()
 {
-	 isOpen = false;
+	 isOpen = false; // Closes the ticket by setting it false
 }
 
 
+inline ostream& operator<<(ostream& out, const ExtendedWorkTicket& ticket)
+{
+	out << "\nWork Ticket #: " << ticket.GetTicketNumber()
+		<< "\nClient ID:     " << ticket.GetClientId()
+		<< "\nDate:          " << ticket.GetDate()
+		<< "\nIssue:         " << ticket.GetDescription();
+	if (ticket.IsOpen())
+		out << "\nTicket : OPEN" << endl;
+	else
+		out << "\nTicket : CLOSED" << endl;
+
+	return out;
+
+}
 
 #endif
