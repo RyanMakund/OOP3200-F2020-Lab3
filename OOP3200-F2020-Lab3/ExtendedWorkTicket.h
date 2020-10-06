@@ -30,8 +30,10 @@ public:
 
 	bool SetWorkTicket(int ticket_number, string client_id, int day, int month, int year, string description, bool is_open);
 
-	
+	void ShowWorkTicket() const override;
 
+	void CloseTicket();
+ 
 
 private:
 	bool isOpen;
@@ -57,6 +59,23 @@ inline bool ExtendedWorkTicket::SetWorkTicket(int ticket_number, string client_i
 	}
 }
 
+inline void ExtendedWorkTicket::ShowWorkTicket() const
+{
+	WorkTicket::ShowWorkTicket();
+	if (isOpen)
+	{
+		cout << "Ticket: OPEN" << endl;
+	}
+	else
+	{
+		cout << "Ticket: CLOSED" << endl;
+	}
+}
+
+inline void ExtendedWorkTicket::CloseTicket()
+{
+	 isOpen = false;
+}
 
 
 
